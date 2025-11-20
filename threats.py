@@ -92,7 +92,11 @@ def build_threat(code):
     threats = [None] * 9
     for n in range(9):
         if code[n] == 1:
-            threat_type = random.choice(THREAT_TYPES).name
+            threat_type = random.choices(
+                    THREAT_TYPES,
+                    weights=[t.chance for t in THREAT_TYPES],
+                    k=1
+                )[0].name
             if threat_type == "Humanoid":
                 threats[n] = random.choices(
                     HUMANOID_THREATS,
